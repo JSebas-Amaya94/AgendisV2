@@ -1,0 +1,8 @@
+.imagenlist {
+    display: flex;
+    border-radius: 100%;
+    max-width: 200px;
+    min-width: 100px;
+    width: 50%;
+    margin: 20px;
+}
