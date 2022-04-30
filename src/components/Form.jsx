@@ -10,7 +10,7 @@ const Form = () => {
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [webLink, setWebLink] = React.useState("");
-  const [imagePicsum, setImagePicsum] = React.useState("");
+  // const [imagePicsum, setImagePicsum] = React.useState("");
 
   const [listaContactos, setListaContactos] = React.useState([]);
 
@@ -27,17 +27,20 @@ const Form = () => {
     
   // }
 
-  const urlimg = 'https://picsum.photos/v2/list?page=2&limit=100';
-  React.useEffect( () => {
-      fetch(urlimg)
-      .then(response => response.json())
-      .then(data => {
-        const index = randomNum(100)
-        setImagePicsum(data[index].download_url)
-        console.log(data)
-       })
+  // const urlimg = 'https://picsum.photos/v2/list?page=2&limit=100';
+  // React.useEffect( () => {
+  //     fetch(urlimg)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const index = randomNum(100)
+  //       setImagePicsum(data[index].download_url)
+  //       console.log(data)
+  //      })
      
-     },[])
+  //    },[])
+
+  const idImg = randomNum(100);
+  const urlImg = 'https://picsum.photos/id/'+idImg+'/200';
 
   React.useEffect(() => {
     const obtenerDatos = async () => {
@@ -88,7 +91,7 @@ const Form = () => {
         emailCliente: email,
         phoneCliente: phone,
         webSiteCliente: webLink,
-        imgenCliente: imagePicsum,
+        imgenCliente: urlImg,
       };
 
       await db.collection("agendisv2").add(nuevoContacto);
@@ -103,7 +106,7 @@ const Form = () => {
           emailCliente: email,
           phoneCliente: phone,
           webSiteCliente: webLink,
-          imgenCliente: imagePicsum,
+          imgenCliente: urlImg,
         },
       ]);
 
@@ -162,7 +165,7 @@ const Form = () => {
         empresaCliente: empresa,
         emailCliente: email,
         phoneCliente: phone,
-        webSiteCliente: webLink,
+        webSiteCliente: webLink, 
       });
       const arrayEditado = listaContactos.map((item) =>
         item.id === id
@@ -174,7 +177,7 @@ const Form = () => {
               emailCliente: email,
               phoneCliente: phone,
               webSiteCliente: webLink,
-              imgenCliente: imagePicsum,
+              imgenCliente: (item.imgenCliente),
             }
           : item
       );
