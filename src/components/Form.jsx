@@ -103,6 +103,7 @@ const Form = () => {
           emailCliente: email,
           phoneCliente: phone,
           webSiteCliente: webLink,
+          imgenCliente: imagePicsum,
         },
       ]);
 
@@ -173,6 +174,7 @@ const Form = () => {
               emailCliente: email,
               phoneCliente: phone,
               webSiteCliente: webLink,
+              imgenCliente: imagePicsum,
             }
           : item
       );
@@ -235,10 +237,7 @@ const Form = () => {
           <ul className="list-group">
             {listaContactos.map((item) => (
               <li className="listItemPersonal" key={item.id}>
-                {
-                 imagePicsum && <div className="circleimg"><img className="imagenlist" src={item.imgenCliente} alt="ImagenRandom"/></div>
-                
-                }
+                 <div className="circleimg"><img className="imagenlist" src={item.imgenCliente} alt="ImagenRandom"/></div>   
                 <span className="lead">
                   Nombre: {item.nombreCliente} {item.apellidoCliente} <br />
                   Empresa: {item.empresaCliente} <br />
