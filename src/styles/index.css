@@ -3,14 +3,25 @@ body {
   font-family: nunito;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: blueviolet;
+  background-color: #8a2be2;
 }
 
 h1 {
   color:white;
+  font-weight: bold;
+}
+
+h4{
+  color: white;
+  margin-bottom: 1.3rem;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+hr{
+  background-color: white;
+
 }

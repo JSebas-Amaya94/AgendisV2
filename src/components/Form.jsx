@@ -10,7 +10,7 @@ const Form = () => {
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [webLink, setWebLink] = React.useState("");
-  // const [imagePicsum, setImagePicsum] = React.useState("");
+  const [imagePicsum, setImagePicsum] = React.useState("");
 
   const [listaContactos, setListaContactos] = React.useState([]);
 
@@ -18,15 +18,26 @@ const Form = () => {
   const [modoEdicion, setModoEdicion] = React.useState(false);
   const [error, setError] = React.useState(null);
 
-  // const urlimg = 'https://picsum.photos/v2/list?page=2&limit=100';
-  // React.useEffect( () => {
-  //    fetch(urlimg)
-  //    .then(response => response.json())
-  //    .then(data => {
-  //      setImagePicsum(data.id)
-  //     })
+
+  function randomNum (max) {
+    return Math.floor((Math.random() * (max - 0 + 1)) + 0);
+}
+  // function recall(){
+  //   window.location.reload(true)
+    
+  // }
+
+  const urlimg = 'https://picsum.photos/v2/list?page=2&limit=100';
+  React.useEffect( () => {
+      fetch(urlimg)
+      .then(response => response.json())
+      .then(data => {
+        const index = randomNum(100)
+        setImagePicsum(data[index].download_url)
+        console.log(data)
+       })
      
-  //   },[])
+     },[])
 
   React.useEffect(() => {
     const obtenerDatos = async () => {
@@ -77,7 +88,7 @@ const Form = () => {
         emailCliente: email,
         phoneCliente: phone,
         webSiteCliente: webLink,
-        //imgenCliente:
+        imgenCliente: imagePicsum,
       };
 
       await db.collection("agendisv2").add(nuevoContacto);
@@ -215,36 +226,40 @@ const Form = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-center">Agendis</h1>
-      <hr />
+    <>
+      <h1 className="text-centertitle">Agendis <br/> <span className="titleDes">Tus Contactos en un sitio seguro</span></h1>
       <div className="row">
         <div className="col-8">
-          <h4 className="text-center">Contactos</h4>
-          <br />
+          {/* <h4 className="text-center">Contactos</h4>
+          <br /> */}
           <ul className="list-group">
             {listaContactos.map((item) => (
-              <li className="list-group-item" key={item.id}>
+              <li className="listItemPersonal" key={item.id}>
+                {
+                 imagePicsum && <div className="circleimg"><img className="imagenlist" src={item.imgenCliente} alt="ImagenRandom"/></div>
+                
+                }
                 <span className="lead">
-                  <img className="imagenlist" src="https://picsum.photos/200" alt="ImagenRandom"/>
                   Nombre: {item.nombreCliente} {item.apellidoCliente} <br />
                   Empresa: {item.empresaCliente} <br />
                   Email: {item.emailCliente} <br />
                   Phone: {item.phoneCliente} <br />
                   Site: {item.webSiteCliente} <br />
                 </span>
-                <button
-                  className="btn btn-danger btn-sm float-end mx-2"
-                  onClick={() => eliminaritem(item.id)}
-                >
-                  Eliminar
-                </button>
-                <button
-                  className="btn btn-warning btn-sm float-end"
-                  onClick={() => editar(item)}
-                >
-                  Editar
-                </button>
+                <div className="BtnContainer">
+                    <button
+                    className="btn btn-danger btn-sm float-end mx-2"
+                    onClick={() => eliminaritem(item.id)}
+                  >
+                    Eliminar
+                  </button>
+                  <button
+                    className="btn btn-warning btn-sm float-end"
+                    onClick={() => editar(item)}
+                  >
+                    Editar
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
@@ -316,14 +331,14 @@ const Form = () => {
                 </button>
               </>
             ) : (
-              <button className="btn btn-primary btn-block" type="submit">
+              <button className="btnAdd" type="submit">
                 Agregar
               </button>
             )}
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
