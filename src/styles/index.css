@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: nunito;
+  font-family: roboto, helvetica, arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #8a2be2;
@@ -8,7 +8,6 @@ body {
 
 h1 {
   color:white;
-  font-weight: bold;
 }
 
 h4{
